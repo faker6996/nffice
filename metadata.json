@@ -1,0 +1,5 @@
+{
+  "name": "NFFICE Intranet",
+  "description": "A modern corporate intranet system featuring RBAC, social feed (Talkbox), approvals workflow, and resource management. Built with a sleek, dark-themed UI.",
+  "requestFramePermissions": []
+}
