@@ -1,4 +1,5 @@
-import { ProjectTask, User, Post, ApprovalRequest, Notice } from './types';
+
+import { ProjectTask, User, Post, ApprovalRequest, Notice, UserProfile, AttendanceLog, SystemLog } from './types';
 
 export const PROJECT_PLAN: ProjectTask[] = [
   // Week 1
@@ -30,6 +31,27 @@ export const MOCK_USERS: User[] = [
   { id: 'u3', name: 'Duc PT', role: 'Backend Dev', department: 'Engineering', email: 'ducpt@nffice.com', avatar: 'https://picsum.photos/seed/duc/200/200' },
   { id: 'u4', name: 'Hieu NN', role: 'QA Engineer', department: 'Quality', email: 'hieunn@nffice.com', avatar: 'https://picsum.photos/seed/hieu/200/200' },
 ];
+
+// Extended Profile Data for the logged-in user
+export const MOCK_USER_PROFILE: UserProfile = {
+  ...MOCK_USERS[0],
+  phone: '+84 987 654 321',
+  address: 'Keangnam Landmark 72, Hanoi, Vietnam',
+  bio: 'Passionate about building scalable systems and optimizing developer experience. Currently leading the migration to Micro-Frontend architecture. Fan of clean code and strong coffee.',
+  joinedDate: 'Jan 10, 2022',
+  dob: 'Oct 15, 1995',
+  skills: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'System Design', 'Docker', 'Kubernetes'],
+  socialLinks: [
+    { platform: 'GitHub', url: 'github.com/bachtv', icon: 'github' },
+    { platform: 'LinkedIn', url: 'linkedin.com/in/bachtv', icon: 'linkedin' },
+    { platform: 'Twitter', url: 'twitter.com/bachtv', icon: 'twitter' }
+  ],
+  stats: {
+    projects: 12,
+    yearsExperience: 5,
+    uploads: 148 // Files uploaded
+  }
+};
 
 export const MOCK_POSTS: Post[] = [
   {
@@ -101,4 +123,20 @@ export const MOCK_NOTICES: Notice[] = [
   { id: 'n2', title: 'System Maintenance Window', category: 'IT', content: 'There will be a scheduled server downtime this Sunday from 2 AM to 4 AM for database upgrades.', date: 'Feb 12, 2024', author: 'Duc PT', priority: 'Normal', isRead: true },
   { id: 'n3', title: 'Q1 All Hands Meeting', category: 'General', content: 'Join us for the quarterly review and roadmap discussion. Lunch will be provided.', date: 'Feb 15, 2024', author: 'Bach TV', priority: 'Normal', isRead: false },
   { id: 'n4', title: 'Expense Report Deadline', category: 'Finance', content: 'Please submit all expenses for the previous month by Friday to ensure timely reimbursement.', date: 'Feb 18, 2024', author: 'Hieu NN', priority: 'High', isRead: true },
+];
+
+export const MOCK_ATTENDANCE: AttendanceLog[] = [
+  { id: 'att1', date: 'Feb 14, 2024', checkIn: '08:45 AM', checkOut: '06:15 PM', status: 'On Time', workingHours: 8.5 },
+  { id: 'att2', date: 'Feb 13, 2024', checkIn: '08:55 AM', checkOut: '06:00 PM', status: 'On Time', workingHours: 8.1 },
+  { id: 'att3', date: 'Feb 12, 2024', checkIn: '09:15 AM', checkOut: '06:30 PM', status: 'Late', workingHours: 8.25 },
+  { id: 'att4', date: 'Feb 09, 2024', checkIn: '08:30 AM', checkOut: '05:45 PM', status: 'On Time', workingHours: 8.25 },
+  { id: 'att5', date: 'Feb 08, 2024', checkIn: '08:40 AM', checkOut: '06:00 PM', status: 'On Time', workingHours: 8.3 },
+];
+
+export const MOCK_SYSTEM_LOGS: SystemLog[] = [
+  { id: 'log1', action: 'Uploaded File', target: 'Design_System_v2.fig', timestamp: '1 hour ago', iconType: 'file' },
+  { id: 'log2', action: 'Approved Request', target: 'EXP-2024-001 (Server Costs)', timestamp: '3 hours ago', iconType: 'approval' },
+  { id: 'log3', action: 'System Login', target: 'Web Client (Chrome/Mac)', timestamp: '08:45 AM', iconType: 'auth' },
+  { id: 'log4', action: 'Updated Permission', target: 'Role: Content Editor', timestamp: 'Yesterday', iconType: 'system' },
+  { id: 'log5', action: 'Password Change', target: 'Security Settings', timestamp: '2 days ago', iconType: 'auth' },
 ];

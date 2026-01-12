@@ -1,3 +1,4 @@
+
 export type TaskStatus = 'Done' | 'Pending' | 'InProgress';
 export type Priority = 'High' | 'Medium' | 'Low';
 
@@ -20,6 +21,22 @@ export interface User {
   department: string;
   avatar: string;
   email: string;
+}
+
+// Maps to 'user_profiles' in ERD
+export interface UserProfile extends User {
+  phone: string;
+  address: string;
+  bio: string;
+  joinedDate: string;
+  dob: string;
+  skills: string[];
+  socialLinks: { platform: string; url: string; icon: string }[];
+  stats: {
+    projects: number;
+    yearsExperience: number;
+    uploads: number; // Maps to 'files' count
+  };
 }
 
 export interface Comment {
@@ -61,4 +78,23 @@ export interface Notice {
   author: string;
   priority: 'High' | 'Normal';
   isRead: boolean;
+}
+
+// Maps to 'attendance_logs' in ERD
+export interface AttendanceLog {
+  id: string;
+  date: string;
+  checkIn: string;
+  checkOut: string;
+  status: 'On Time' | 'Late' | 'Absent';
+  workingHours: number;
+}
+
+// Maps to 'system_logs' in ERD
+export interface SystemLog {
+  id: string;
+  action: string; // e.g., 'LOGIN', 'UPLOAD_FILE', 'APPROVE_REQUEST'
+  target: string;
+  timestamp: string;
+  iconType: 'auth' | 'file' | 'approval' | 'system';
 }
