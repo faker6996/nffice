@@ -30,7 +30,6 @@ export interface UserProfile extends User {
   bio: string;
   joinedDate: string;
   dob: string;
-  skills: string[];
   socialLinks: { platform: string; url: string; icon: string }[];
   stats: {
     projects: number;
@@ -60,13 +59,24 @@ export interface Post {
   images?: string[];
 }
 
+export interface ApprovalStep {
+  approver: User;
+  status: 'Pending' | 'Approved' | 'Rejected';
+  comment?: string;
+  timestamp?: string;
+}
+
 export interface ApprovalRequest {
   id: string;
-  type: 'Vacation' | 'Expense' | 'Report';
+  type: 'Vacation' | 'Expense' | 'Report' | 'Procurement';
   title: string;
+  description?: string;
   status: 'Pending' | 'Approved' | 'Rejected';
+  urgency: 'High' | 'Medium' | 'Low';
   date: string;
-  author: string;
+  author: User;
+  workflow: ApprovalStep[];
+  attachments: string[]; // Mock file names
 }
 
 export interface Notice {

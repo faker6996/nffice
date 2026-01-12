@@ -40,7 +40,6 @@ export const MOCK_USER_PROFILE: UserProfile = {
   bio: 'Passionate about building scalable systems and optimizing developer experience. Currently leading the migration to Micro-Frontend architecture. Fan of clean code and strong coffee.',
   joinedDate: 'Jan 10, 2022',
   dob: 'Oct 15, 1995',
-  skills: ['React', 'TypeScript', 'Node.js', 'PostgreSQL', 'System Design', 'Docker', 'Kubernetes'],
   socialLinks: [
     { platform: 'GitHub', url: 'github.com/bachtv', icon: 'github' },
     { platform: 'LinkedIn', url: 'linkedin.com/in/bachtv', icon: 'linkedin' },
@@ -113,9 +112,49 @@ export const MOCK_POSTS: Post[] = [
 ];
 
 export const MOCK_APPROVALS: ApprovalRequest[] = [
-  { id: 'req1', type: 'Vacation', title: 'Annual Leave - Lunar New Year', status: 'Pending', date: 'Jan 20, 2024', author: 'Hieu NN' },
-  { id: 'req2', type: 'Expense', title: 'Server Costs Q1', status: 'Approved', date: 'Jan 15, 2024', author: 'Bach TV' },
-  { id: 'req3', type: 'Report', title: 'Q4 Financial Report', status: 'Rejected', date: 'Jan 10, 2024', author: 'Anh NV' },
+  { 
+    id: 'req1', 
+    type: 'Vacation', 
+    title: 'Annual Leave - Lunar New Year', 
+    description: 'Taking 5 days off for Tet holidays with family.',
+    status: 'Pending', 
+    urgency: 'Medium',
+    date: 'Jan 20, 2024', 
+    author: MOCK_USERS[3], // Hieu NN
+    attachments: [],
+    workflow: [
+      { approver: MOCK_USERS[0], status: 'Pending' }, // Bach TV
+      { approver: MOCK_USERS[1], status: 'Pending' }  // Anh NV
+    ]
+  },
+  { 
+    id: 'req2', 
+    type: 'Expense', 
+    title: 'AWS Server Costs Q1', 
+    description: 'Payment for EC2 and RDS instances for Jan-Mar 2024.',
+    status: 'Approved', 
+    urgency: 'High',
+    date: 'Jan 15, 2024', 
+    author: MOCK_USERS[0], // Bach TV
+    attachments: ['invoice_jan.pdf', 'cost_explorer.csv'],
+    workflow: [
+      { approver: MOCK_USERS[2], status: 'Approved', comment: 'Looks within budget.', timestamp: 'Jan 16, 2024' }
+    ]
+  },
+  { 
+    id: 'req3', 
+    type: 'Report', 
+    title: 'Q4 Financial Report', 
+    description: 'Draft version of the end-of-year financial statement.',
+    status: 'Rejected', 
+    urgency: 'Low',
+    date: 'Jan 10, 2024', 
+    author: MOCK_USERS[1], // Anh NV
+    attachments: ['q4_report_v1.xlsx'],
+    workflow: [
+       { approver: MOCK_USERS[0], status: 'Rejected', comment: 'Missing marketing expenses section.', timestamp: 'Jan 11, 2024' }
+    ]
+  },
 ];
 
 export const MOCK_NOTICES: Notice[] = [
