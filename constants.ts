@@ -122,9 +122,32 @@ export const MOCK_APPROVALS: ApprovalRequest[] = [
     date: 'Jan 20, 2024', 
     author: MOCK_USERS[3], // Hieu NN
     attachments: [],
+    // Groups
+    reviewers: [MOCK_USERS[0]], // Bach TV (Tán thành)
+    consensus: [MOCK_USERS[2]], // Duc PT (Đồng thuận)
+    // Chain
     workflow: [
-      { approver: MOCK_USERS[0], status: 'Pending' }, // Bach TV
-      { approver: MOCK_USERS[1], status: 'Pending' }  // Anh NV
+      { 
+        id: 'step1',
+        name: 'Step 1: Manager',
+        approver: MOCK_USERS[0], // Bach TV
+        status: 'Pending'
+      },
+      { 
+        id: 'step2',
+        name: 'Step 2: HR Head',
+        approver: MOCK_USERS[1], // Anh NV
+        status: 'Pending'
+      }
+    ],
+    comments: [
+      {
+        id: 'cmt1',
+        author: MOCK_USERS[0],
+        content: 'Please make sure to hand over the QA tasks before leaving.',
+        timestamp: 'Jan 21, 2024 09:30 AM',
+        likes: 0
+      }
     ]
   },
   { 
@@ -137,23 +160,19 @@ export const MOCK_APPROVALS: ApprovalRequest[] = [
     date: 'Jan 15, 2024', 
     author: MOCK_USERS[0], // Bach TV
     attachments: ['invoice_jan.pdf', 'cost_explorer.csv'],
+    reviewers: [],
+    consensus: [],
     workflow: [
-      { approver: MOCK_USERS[2], status: 'Approved', comment: 'Looks within budget.', timestamp: 'Jan 16, 2024' }
-    ]
-  },
-  { 
-    id: 'req3', 
-    type: 'Report', 
-    title: 'Q4 Financial Report', 
-    description: 'Draft version of the end-of-year financial statement.',
-    status: 'Rejected', 
-    urgency: 'Low',
-    date: 'Jan 10, 2024', 
-    author: MOCK_USERS[1], // Anh NV
-    attachments: ['q4_report_v1.xlsx'],
-    workflow: [
-       { approver: MOCK_USERS[0], status: 'Rejected', comment: 'Missing marketing expenses section.', timestamp: 'Jan 11, 2024' }
-    ]
+      { 
+        id: 'step1',
+        name: 'Step 1: Finance',
+        approver: MOCK_USERS[2], 
+        status: 'Approved', 
+        timestamp: 'Jan 16, 2024',
+        comment: 'Looks within budget.'
+      }
+    ],
+    comments: []
   },
 ];
 

@@ -60,10 +60,12 @@ export interface Post {
 }
 
 export interface ApprovalStep {
-  approver: User;
+  id: string;
+  name: string; // e.g. "Step 1"
+  approver: User; // Single person: "Sếp"
   status: 'Pending' | 'Approved' | 'Rejected';
-  comment?: string;
   timestamp?: string;
+  comment?: string;
 }
 
 export interface ApprovalRequest {
@@ -75,8 +77,16 @@ export interface ApprovalRequest {
   urgency: 'High' | 'Medium' | 'Low';
   date: string;
   author: User;
+  
+  // Sequential Chain of Command
   workflow: ApprovalStep[];
+  
+  // Global Groups
+  reviewers: User[]; // "Tán thành" group
+  consensus: User[]; // "Đồng thuận" group
+  
   attachments: string[]; // Mock file names
+  comments: Comment[]; // Discussion thread
 }
 
 export interface Notice {

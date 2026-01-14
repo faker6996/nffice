@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Layout } from './components/Layout';
 import { Dashboard } from './components/views/Dashboard';
@@ -7,6 +8,8 @@ import { Colleague } from './components/views/Colleague';
 import { Notice } from './components/views/Notice';
 import { Settings } from './components/views/Settings';
 import { Profile } from './components/views/Profile';
+import { Department } from './components/views/Department';
+import { Regulations } from './components/views/Regulations';
 import { MOCK_USERS } from './constants';
 
 // Placeholder for views that are not yet fully implemented in the demo
@@ -32,13 +35,13 @@ export default function App() {
       case 'approvals': return <Approvals />;
       case 'notice': return <Notice />;
       
-      // Regulations (Mapped to Notice for demo or Placeholder)
-      case 'regulations': return <Notice />; // Reusing Notice view for now as it contains regulations
+      // Regulations
+      case 'regulations': return <Regulations />;
       case 'attendance': return <PlaceholderView title="Attendance Management" />;
       
       // Management
       case 'users': return <PlaceholderView title="User Management" />;
-      case 'departments': return <PlaceholderView title="Department Management" />;
+      case 'departments': return <Department />;
       case 'colleague': return <Colleague />;
       
       // Settings

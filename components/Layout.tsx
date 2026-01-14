@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { 
   LayoutDashboard, 
@@ -19,6 +20,7 @@ import {
   ChevronDown
 } from 'lucide-react';
 import { User } from '../types';
+import { ChatWidget } from './ui/ChatWidget';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -204,6 +206,9 @@ export const Layout: React.FC<LayoutProps> = ({ children, activeTab, onTabChange
         <div className="p-8 max-w-7xl mx-auto animate-in fade-in duration-500">
           {children}
         </div>
+
+        {/* Floating Chat Widget */}
+        <ChatWidget />
       </main>
     </div>
   );
