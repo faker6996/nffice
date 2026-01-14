@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
   LayoutDashboard, 
   MessageSquare, 
@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import { User } from '../types';
 import { ChatWidget } from './ui/ChatWidget';
+import { NotificationsPopover } from './ui/NotificationsPopover';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -67,6 +68,19 @@ const NavGroup: React.FC<{ label: string; children: React.ReactNode; collapsed: 
 
 export const Layout: React.FC<LayoutProps> = ({ children, activeTab, onTabChange, currentUser }) => {
   const [collapsed, setCollapsed] = useState(false);
+  const [isNotifOpen, setIsNotifOpen] = useState(false);
+  const notifRef = useRef<HTMLDivElement>(null);
+
+  // Close notifications when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (notifRef.current && !notifRef.current.contains(event.target as Node)) {
+        setIsNotifOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   // Main Menu Items
   const mainItems = [
@@ -195,11 +209,17 @@ export const Layout: React.FC<LayoutProps> = ({ children, activeTab, onTabChange
                />
              </div>
           </div>
-          <div className="flex items-center gap-4">
-            <button className="relative p-2 text-zinc-400 hover:text-white transition-colors">
-              <Bell size={20} />
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-zinc-950"></span>
+          <div className="flex items-center gap-4 relative" ref={notifRef}>
+            <button 
+              onClick={() => setIsNotifOpen(!isNotifOpen)}
+              className={`relative p-2 transition-colors rounded-full ${isNotifOpen ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:text-white hover:bg-zinc-800/50'}`}
+            >
+              <Bell size={20} className={isNotifOpen ? 'fill-current' : ''} />
+              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-zinc-950 animate-pulse"></span>
             </button>
+            
+            {/* Notification Dropdown */}
+            {isNotifOpen && <NotificationsPopover onClose={() => setIsNotifOpen(false)} />}
           </div>
         </header>
 
